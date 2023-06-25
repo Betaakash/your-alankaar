@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import './App.css';
+import jsPDF from 'jspdf';
 
 const noteSets = [
   {
     id: 1,
-    label: "Set 1 (sa re ga ma pa dha ni)",
+    label: "Sa re ga..",
     notes: {
       "1": "sa",
       "2": "re",
@@ -17,7 +19,7 @@ const noteSets = [
   },
   {
     id: 2,
-    label: "Set 2 (do re mi fa so la ti)",
+    label: "Do re mi...",
     notes: {
       "1": "do",
       "2": "re",
@@ -31,17 +33,17 @@ const noteSets = [
 ];
 
 const App = () => {
-  const [pattern, setPattern] = useState("");
+  const [pattern, setPattern] = useState('');
   const [convertedAarohNotes, setConvertedAarohNotes] = useState([]);
   const [convertedAvrohNotes, setConvertedAvrohNotes] = useState([]);
   const [iterationsPrinted, setIterationsPrinted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
-  const [buttonTitle, setButtonTitle] = useState("Get Pattern");
+  const [buttonTitle, setButtonTitle] = useState('Get Pattern');
 
   const convertPatternToNotes = (pattern) => {
-    const notes = pattern.split("").map((digit) => selectedNoteSet.notes[digit]);
-    return notes.join(" ");
+    const notes = pattern.split('').map((digit) => selectedNoteSet.notes[digit]);
+    return notes.join(' ');
   };
 
   const handlePatternChange = (e) => {
@@ -55,7 +57,7 @@ const App = () => {
   };
 
   const generateNextIteration = (currentPattern) => {
-    let nextPattern = "";
+    let nextPattern = '';
 
     for (let i = 0; i < currentPattern.length; i++) {
       let nextDigit = parseInt(currentPattern[i]) + 1;
@@ -72,8 +74,8 @@ const App = () => {
 
   const handleNextIterations = () => {
     if (pattern.length > 0) {
-      const iterations = 8; // Update the number of iterations to 8
-      const iterationsList = [pattern]; // Initialize the list with the first pattern
+      const iterations = 8;
+      const iterationsList = [pattern];
 
       let nextPattern = pattern;
 
@@ -82,9 +84,7 @@ const App = () => {
         iterationsList.push(nextPattern);
       }
 
-      const convertedAarohIterations = iterationsList.map((iter) =>
-        convertPatternToNotes(iter)
-      );
+      const convertedAarohIterations = iterationsList.map((iter) => convertPatternToNotes(iter));
       const convertedAvrohIterations = [...convertedAarohIterations].reverse();
 
       setConvertedAarohNotes(convertedAarohIterations);
@@ -109,7 +109,7 @@ const App = () => {
       setConvertedAarohNotes(convertedAarohIterations);
       setConvertedAvrohNotes(convertedAvrohIterations);
       setIterationsPrinted(false);
-      setButtonTitle("Get Pattern");
+      setButtonTitle('Generate');
     }
   };
 
@@ -125,11 +125,27 @@ const App = () => {
     }
   }, [selectedNoteSet]);
 
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+
+    doc.text('Entered Pattern: ' + pattern, 10, 10);
+    doc.text('Aaroh / Ascending:', 10, 20);
+    convertedAarohNotes.forEach((notes, index) => {
+      doc.text(notes, 10, 30 + index * 10);
+    });
+    doc.text('Avroh / Descending:', 10, 40 + convertedAarohNotes.length * 10);
+    convertedAvrohNotes.reverse().forEach((notes, index) => {
+      doc.text(notes.split(' ').reverse().join(' '), 10, 50 + (convertedAarohNotes.length + index) * 10);
+    });
+
+    doc.save('Your Alankar.pdf');
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="/">
-          Your Aalap
+          Your Alankar
         </a>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
@@ -142,7 +158,18 @@ const App = () => {
         </div>
       </nav>
 
-      <label>Enter the pattern:</label>
+      <label>Select Note Set:</label>
+      <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
+        {noteSets.map((set) => (
+          <option key={set.id} value={set.id}>
+            {set.label}
+          </option>
+        ))}
+      </select>
+
+      <br />
+
+      <label className="font-link">Enter the pattern:</label>
       <input
         type="text"
         value={pattern}
@@ -151,36 +178,24 @@ const App = () => {
         // title="Please enter a valid pattern using numbers from 1 to 7 only."
       />
       <br />
-      <label>Select note set:</label>
-      <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
-        {noteSets.map((set) => (
-          <option key={set.id} value={set.id}>
-            {set.label}
-          </option>
-        ))}
-      </select>
-      <br />
       <button onClick={handleNextIterations} disabled={iterationsPrinted}>
-        {iterationsPrinted ? buttonTitle : "Get Pattern"}
+        {iterationsPrinted ? buttonTitle : 'Generate'}
       </button>
       <br />
 
       {iterationsPrinted && (
         <div>
-          <h2>Aaroh:</h2>
+          <h2>Aaroh / Ascending:</h2>
           <ul>
             {convertedAarohNotes.map((notes, index) => (
               <li key={index}>{notes}</li>
             ))}
           </ul>
-          <h2>Avroh:</h2>
+          <h2>Avroh / Descending:</h2>
           <ul>
             {convertedAvrohNotes.reverse().map((notes, index) => (
               <li key={index}>
-                {notes
-                  .split(" ")
-                  .reverse()
-                  .join(" ")}
+                {notes.split(' ').reverse().join(' ')}
               </li>
             ))}
           </ul>
@@ -188,24 +203,25 @@ const App = () => {
       )}
 
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <h2>Your Aalap</h2>
-        <h3>Aaroh:</h3>
+        <h2 className="font-link">Entered Pattern: {pattern}</h2>
+        <h3 className="font-link">Aaroh / Ascending:</h3>
         <ul>
           {convertedAarohNotes.map((notes, index) => (
             <li key={index}>{notes}</li>
           ))}
         </ul>
-        <h3>Avroh:</h3>
+        <h3>Avroh / Descending:</h3>
         <ul>
           {convertedAvrohNotes.reverse().map((notes, index) => (
             <li key={index}>
               {notes
-                .split(" ")
+                .split(' ')
                 .reverse()
-                .join(" ")}
+                .join(' ')}
             </li>
           ))}
         </ul>
+        <button onClick={handleDownloadPDF}>Download PDF</button>
         <button onClick={handleCloseModal}>Close</button>
       </Modal>
     </div>
@@ -213,3 +229,4 @@ const App = () => {
 };
 
 export default App;
+
