@@ -32,7 +32,8 @@ const noteSets = [
 
 const App = () => {
   const [pattern, setPattern] = useState("");
-  const [convertedNotes, setConvertedNotes] = useState([]);
+  const [convertedAarohNotes, setConvertedAarohNotes] = useState([]);
+  const [convertedAvrohNotes, setConvertedAvrohNotes] = useState([]);
   const [iterationsPrinted, setIterationsPrinted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
@@ -81,11 +82,13 @@ const App = () => {
         iterationsList.push(nextPattern);
       }
 
-      const convertedIterations = iterationsList.map((iter) =>
+      const convertedAarohIterations = iterationsList.map((iter) =>
         convertPatternToNotes(iter)
       );
+      const convertedAvrohIterations = [...convertedAarohIterations].reverse();
 
-      setConvertedNotes(convertedIterations);
+      setConvertedAarohNotes(convertedAarohIterations);
+      setConvertedAvrohNotes(convertedAvrohIterations);
       setIterationsPrinted(true);
       setIsModalOpen(true);
     }
@@ -101,17 +104,24 @@ const App = () => {
     setSelectedNoteSet(selectedSet);
 
     if (iterationsPrinted) {
+      const convertedAarohIterations = [...convertedAarohNotes];
+      const convertedAvrohIterations = [...convertedAarohNotes].reverse();
+      setConvertedAarohNotes(convertedAarohIterations);
+      setConvertedAvrohNotes(convertedAvrohIterations);
       setIterationsPrinted(false);
       setButtonTitle("Get Pattern");
     }
   };
 
   useEffect(() => {
-    if (iterationsPrinted && convertedNotes.length > 0) {
-      const convertedIterations = convertedNotes.map((iter) =>
+    if (iterationsPrinted && convertedAarohNotes.length > 0) {
+      const convertedAarohIterations = convertedAarohNotes.map((iter) =>
         convertPatternToNotes(iter)
       );
-      setConvertedNotes(convertedIterations);
+      const convertedAvrohIterations = [...convertedAarohIterations].reverse();
+
+      setConvertedAarohNotes(convertedAarohIterations);
+      setConvertedAvrohNotes(convertedAvrohIterations);
     }
   }, [selectedNoteSet]);
 
@@ -138,8 +148,7 @@ const App = () => {
         value={pattern}
         onChange={handlePatternChange}
         pattern="[1-7]*"
-        maxLength="7"
-        title="Please enter a valid pattern using numbers from 1 to 7 only."
+        // title="Please enter a valid pattern using numbers from 1 to 7 only."
       />
       <br />
       <label>Select note set:</label>
@@ -155,18 +164,46 @@ const App = () => {
         {iterationsPrinted ? buttonTitle : "Get Pattern"}
       </button>
       <br />
-      <h2>Converted Notes:</h2>
-      <ul>
-        {convertedNotes.map((notes, index) => (
-          <li key={index}>{notes}</li>
-        ))}
-      </ul>
+
+      {iterationsPrinted && (
+        <div>
+          <h2>Aaroh:</h2>
+          <ul>
+            {convertedAarohNotes.map((notes, index) => (
+              <li key={index}>{notes}</li>
+            ))}
+          </ul>
+          <h2>Avroh:</h2>
+          <ul>
+            {convertedAvrohNotes.reverse().map((notes, index) => (
+              <li key={index}>
+                {notes
+                  .split(" ")
+                  .reverse()
+                  .join(" ")}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <h2>Iterations</h2>
+        <h2>Your Aalap</h2>
+        <h3>Aaroh:</h3>
         <ul>
-          {convertedNotes.map((notes, index) => (
+          {convertedAarohNotes.map((notes, index) => (
             <li key={index}>{notes}</li>
+          ))}
+        </ul>
+        <h3>Avroh:</h3>
+        <ul>
+          {convertedAvrohNotes.reverse().map((notes, index) => (
+            <li key={index}>
+              {notes
+                .split(" ")
+                .reverse()
+                .join(" ")}
+            </li>
           ))}
         </ul>
         <button onClick={handleCloseModal}>Close</button>
