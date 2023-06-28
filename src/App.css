@@ -1,111 +1,203 @@
 /* App.css */
 
 body {
-    background: #f8f8f8;
-    font-family: Inter, sans-serif;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  
-  .navbar {
-    background-color: #f8f8f8;
-    padding: 10px;
-    display: flex;
+  height: 99%;
+  /* background: linear-gradient(133deg, #C5C5C5 0%, rgba(176, 176, 176, 0.98) 43.23%, rgba(126, 126, 126, 0.93) bac100%); */
+  background: linear-gradient(135deg, #c3c3c3, #828282);
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 100vh;
+}
+
+.navbar {
+  background-color: #f8f8f8;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  }
+  margin-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 2px solid var(--stroke, #313200);
+  border-radius: 22px;
+  background: var(
+    --grad-2,
+    linear-gradient(
+      134deg,
+      rgba(66, 62, 32, 0.8) 0%,
+      rgba(69, 69, 69, 0.79) 100%
+    )
+  );
+  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+
+  font-size: 15px;
+  font-family: "Libre Caslon Display", serif;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  color: #efefef;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: #efefef;
+  font-size: 30px;
+  padding: 20px;
+}
+
+h1 {
+  color: #3f3d2d;
+  font-size: 70px;
+  font-family: Libre Caslon Display, sans-serif, thin;
+  width: 55%;
+  /* border: 1px solid #007bff; */
+}
+
+h3 {
+  color: rgba(63, 61, 45, 0.5);
+  font-size: 24px;
+  font-family: Libre Caslon Text;
+}
+/* 
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+} */
+
+.contrainer {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  flex-direction: column;
+}
+
+.row {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  flex-direction: column;
+}
+
+.main-part {
+  border-radius: 5px;
+  background: rgba(217, 217, 217, 0.39);
+  padding: 25px;
+  width: 350px;
+  height: fit-content;
+
+  /* Shadow */
+  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.font-link {
+  color: #3f3d2d;
+  font-size: 24px;
+  font-family: Libre Caslon Text;
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+.label {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+select {
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 2px;
+  background: #eaeaea;
+  font-size: 15px;
+  font-family: Libre Caslon Text;
+  padding-left: 4px;
+  width: 100%;
+  height: 30px;
+  color: #3f3d2d;
+}
+
+input[type="text"] {
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 2px;
+  background: #eaeaea;
+  font-family: Libre Caslon Text;
+  width: 100%;
+  padding-left: 4px;
+  height: 30px;
+  color: #3f3d2d;
+}
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #3f3d2d;
+  color: #f0f0f0;
+  font-size: 28px;
+  font-family: Libre Caslon Text;
+  margin-top: 30px;
+
+  /* Shadow */
+  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+
+button:disabled {
+  background-color: #bdbdbd;
+  /* cursor: not-allowed; */
+  color: rgba(0, 0, 0, 0.5);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  font-family: Libre Caslon Text;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.random {
   
-  .navbar-brand {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .nav-item a {
-    color: #333;
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .label {
-    margin-top: 20px;
-    font-weight: bold;
-  }
-  
-  select {
-    margin-top: 10px;
-    padding: 5px;
-    font-size: 16px;
-  }
-  
-  input[type='text'] {
-    margin-top: 10px;
-    padding: 5px;
-    font-size: 16px;
-  }
-  
-  button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .modal h2 {
-    margin-top: 0;
-    margin-bottom: 10px;
-  }
-  
-  .modal ul {
-    margin-top: 0;
-  }
-  
-  .modal button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .modal button + button {
-    margin-left: 10px;
-  }
-  
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.modal ul {
+  margin-top: 0;
+}
+
+.modal button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal button + button {
+  margin-left: 10px;
+}

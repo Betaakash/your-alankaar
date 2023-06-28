@@ -1,49 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import './App.css';
-import jsPDF from 'jspdf';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import "./App.css";
+import jsPDF from "jspdf";
 
 const noteSets = [
   {
     id: 1,
     label: "Sa re ga..",
     notes: {
-      "1": "sa",
-      "2": "re",
-      "3": "ga",
-      "4": "ma",
-      "5": "pa",
-      "6": "dha",
-      "7": "ni",
+      1: "Sa",
+      2: "Re",
+      3: "Ga",
+      4: "Ma",
+      5: "Pa",
+      6: "Dha",
+      7: "Ni",
     },
   },
   {
     id: 2,
     label: "Do re mi...",
     notes: {
-      "1": "do",
-      "2": "re",
-      "3": "mi",
-      "4": "fa",
-      "5": "so",
-      "6": "la",
-      "7": "ti",
+      1: "Do",
+      2: "Re",
+      3: "Mi",
+      4: "Fa",
+      5: "So",
+      6: "La",
+      7: "Ti",
     },
   },
 ];
 
 const App = () => {
-  const [pattern, setPattern] = useState('');
+  const [pattern, setPattern] = useState("");
   const [convertedAarohNotes, setConvertedAarohNotes] = useState([]);
   const [convertedAvrohNotes, setConvertedAvrohNotes] = useState([]);
   const [iterationsPrinted, setIterationsPrinted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
-  const [buttonTitle, setButtonTitle] = useState('Get Pattern');
+  const [buttonTitle, setButtonTitle] = useState("Get Pattern");
 
   const convertPatternToNotes = (pattern) => {
-    const notes = pattern.split('').map((digit) => selectedNoteSet.notes[digit]);
-    return notes.join(' ');
+    const notes = pattern
+      .split("")
+      .map((digit) => selectedNoteSet.notes[digit]);
+    return notes.join(" ");
   };
 
   const handlePatternChange = (e) => {
@@ -57,7 +59,7 @@ const App = () => {
   };
 
   const generateNextIteration = (currentPattern) => {
-    let nextPattern = '';
+    let nextPattern = "";
 
     for (let i = 0; i < currentPattern.length; i++) {
       let nextDigit = parseInt(currentPattern[i]) + 1;
@@ -84,7 +86,9 @@ const App = () => {
         iterationsList.push(nextPattern);
       }
 
-      const convertedAarohIterations = iterationsList.map((iter) => convertPatternToNotes(iter));
+      const convertedAarohIterations = iterationsList.map((iter) =>
+        convertPatternToNotes(iter)
+      );
       const convertedAvrohIterations = [...convertedAarohIterations].reverse();
 
       setConvertedAarohNotes(convertedAarohIterations);
@@ -109,7 +113,7 @@ const App = () => {
       setConvertedAarohNotes(convertedAarohIterations);
       setConvertedAvrohNotes(convertedAvrohIterations);
       setIterationsPrinted(false);
-      setButtonTitle('Generate');
+      setButtonTitle("Generate");
     }
   };
 
@@ -128,17 +132,21 @@ const App = () => {
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
 
-    doc.text('Entered Pattern: ' + pattern, 10, 10);
-    doc.text('Aaroh / Ascending:', 10, 20);
+    doc.text("Entered Pattern: " + pattern, 10, 10);
+    doc.text("Aaroh / Ascending:", 10, 20);
     convertedAarohNotes.forEach((notes, index) => {
       doc.text(notes, 10, 30 + index * 10);
     });
-    doc.text('Avroh / Descending:', 10, 40 + convertedAarohNotes.length * 10);
-    convertedAvrohNotes.reverse().forEach((notes, index) => {
-      doc.text(notes.split(' ').reverse().join(' '), 10, 50 + (convertedAarohNotes.length + index) * 10);
+    doc.text("Avroh / Descending:", 10, 40 + convertedAarohNotes.length * 10);
+    convertedAvrohNotes.forEach((notes, index) => {
+      doc.text(
+        notes.split(" ").reverse().join(" "),
+        10,
+        50 + (convertedAarohNotes.length + index) * 10
+      );
     });
 
-    doc.save('Your Alankar.pdf');
+    doc.save("Your Alankar.pdf");
   };
 
   return (
@@ -151,56 +159,70 @@ const App = () => {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="/">
-                Quick Tutorial: <span className="sr-only"></span>
+                Home<span className="sr-only"></span>
+              </a>
+
+              <a className="nav-link" href="/">
+                About<span className="sr-only"></span>
               </a>
             </li>
           </ul>
         </div>
       </nav>
+      <div className="hh1">
+        <h1>Generates Alankaar Patterns for you to Practice.</h1>
+      </div>
 
-      <label>Select Note Set:</label>
-      <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
-        {noteSets.map((set) => (
-          <option key={set.id} value={set.id}>
-            {set.label}
-          </option>
-        ))}
-      </select>
+      <div className="container">
+        <div className="row">
+          <div className="col1">
+            <h3>
+              Refer to the image: <br />
+              Eg: Sa Re Ga Re Sa becomes 12321
+            </h3>
+            <div className="main-part">
+              <label className="font-link">Select Note Style:</label>
+              <select
+                className="select"
+                value={selectedNoteSet.id}
+                onChange={handleNoteSetChange}
+              >
+                {noteSets.map((set) => (
+                  <option key={set.id} value={set.id}>
+                    {set.label}
+                  </option>
+                ))}
+              </select>
 
-      <br />
+              <br />
 
-      <label className="font-link">Enter the pattern:</label>
-      <input
-        type="text"
-        value={pattern}
-        onChange={handlePatternChange}
-        pattern="[1-7]*"
-        // title="Please enter a valid pattern using numbers from 1 to 7 only."
-      />
-      <br />
-      <button onClick={handleNextIterations} disabled={iterationsPrinted}>
-        {iterationsPrinted ? buttonTitle : 'Generate'}
-      </button>
-      <br />
-
-      {iterationsPrinted && (
-        <div>
-          <h2>Aaroh / Ascending:</h2>
-          <ul>
-            {convertedAarohNotes.map((notes, index) => (
-              <li key={index}>{notes}</li>
-            ))}
-          </ul>
-          <h2>Avroh / Descending:</h2>
-          <ul>
-            {convertedAvrohNotes.reverse().map((notes, index) => (
-              <li key={index}>
-                {notes.split(' ').reverse().join(' ')}
-              </li>
-            ))}
-          </ul>
+              <label className="font-link">Enter Pattern:</label>
+              <input
+                type="text"
+                value={pattern}
+                onChange={handlePatternChange}
+                pattern="[1-7]*"
+                placeholder="Enter here..."
+                // title="Please enter a valid pattern using numbers from 1 to 7 only."
+              />
+              <br />
+              <button
+                onClick={handleNextIterations}
+                disabled={iterationsPrinted}
+              >
+                {iterationsPrinted ? buttonTitle : "Generate"}
+              </button>
+            </div>
+            <br />
+          </div>
+          <div className="col2">
+            <img src="assets\Refer.png" alt="yo" />
+          </div>
+       
         </div>
-      )}
+      </div>
+
+      
 
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
         <h2 className="font-link">Entered Pattern: {pattern}</h2>
@@ -210,15 +232,10 @@ const App = () => {
             <li key={index}>{notes}</li>
           ))}
         </ul>
-        <h3>Avroh / Descending:</h3>
+        <h3 className="font-link">Avroh / Descending:</h3>
         <ul>
           {convertedAvrohNotes.reverse().map((notes, index) => (
-            <li key={index}>
-              {notes
-                .split(' ')
-                .reverse()
-                .join(' ')}
-            </li>
+            <li key={index}>{notes.split(" ").reverse().join(" ")}</li>
           ))}
         </ul>
         <button onClick={handleDownloadPDF}>Download PDF</button>
@@ -229,4 +246,3 @@ const App = () => {
 };
 
 export default App;
-
