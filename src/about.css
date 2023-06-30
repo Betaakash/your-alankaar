@@ -1,0 +1,59 @@
+.contactlinks {
+  margin-top: 2rem;
+  margin: 0 auto;
+  display: flex;
+  border: 2px solid white;
+  align-content: center;
+  max-width: 80%;
+  align-items: center;
+
+  justify-content: space-between;
+  background: transparent;
+  border-radius: 40px;
+  box-shadow: 5px 4px 10px 0px rgba(94, 178, 227, 0.5);
+}
+p {
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  font-size: 1rem;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.abouthero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  font-size: 2.8rem;
+  align-content: center;
+  color: #e2e2e2;
+  padding: 4.5rem;
+  padding-bottom: 2rem;
+  font-family: "Roboto Mono", monospace;
+}
+.try {
+  width: 100%;
+  display: flex;
+  align-content: center;
+}
+.contactlinks ul {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  align-content: center;
+  padding-right: 1.7rem;
+  padding-left: 1.7rem;
+}
+
+.contactlinks ul li a img {
+  width: 2rem;
+}
+
+.contactlinks ul li {
+  text-decoration: none;
+  list-style: none;
+  /* padding-left: 1.5rem; */
+}

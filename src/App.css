@@ -336,19 +336,4 @@ ul {
   margin-left: 10px;
 }
 
-@media screen and (max-width: 500px) {
-  ul {
-  }
-  .master {
-    flex-direction: ;
-  }
-  .div1 {
-    flex-basis: 100%;
-    width: 100vh;
-  }
 
-  .div2 {
-    flex-basis: 100%;
-    width: 100%;
-  }
-}

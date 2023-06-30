@@ -9,7 +9,7 @@ import referimg from "./Images/Refer.png";
 const noteSets = [
   {
     id: 1,
-    label: "Sa Re Ga..",
+    label: "Sa Re Ga Ma Pa Dha Ni..",
     notes: {
       1: "Sa",
       2: "Re",
@@ -22,13 +22,13 @@ const noteSets = [
   },
   {
     id: 2,
-    label: "Do Re Mi...",
+    label: "Do Re Mi Fa Sol La Ti..",
     notes: {
       1: "Do",
       2: "Re",
       3: "Mi",
       4: "Fa",
-      5: "So",
+      5: "Sol",
       6: "La",
       7: "Ti",
     },
@@ -43,6 +43,7 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
   const [buttonTitle, setButtonTitle] = useState("Regenerate");
+
 
   const convertPatternToNotes = (pattern) => {
     const notes = pattern
@@ -152,7 +153,7 @@ const App = () => {
 
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
-    const margin = 15;
+    const margin = 13;
     const pageWidth = doc.internal.pageSize.width;
     const lineHeight = 6;
     const headingSpacing = 7;
