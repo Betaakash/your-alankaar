@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
+import About from "./about";
 import Modal from "react-modal";
 import "./App.css";
 import jsPDF from "jspdf";
+import referimg from "./Images/Refer.png";
 
 const noteSets = [
   {
     id: 1,
-    label: "Sa re ga..",
+    label: "Sa Re Ga..",
     notes: {
       1: "Sa",
       2: "Re",
@@ -19,7 +22,7 @@ const noteSets = [
   },
   {
     id: 2,
-    label: "Do re mi...",
+    label: "Do Re Mi...",
     notes: {
       1: "Do",
       2: "Re",
@@ -39,7 +42,7 @@ const App = () => {
   const [iterationsPrinted, setIterationsPrinted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
-  const [buttonTitle, setButtonTitle] = useState("Get Pattern");
+  const [buttonTitle, setButtonTitle] = useState("Regenerate");
 
   const convertPatternToNotes = (pattern) => {
     const notes = pattern
@@ -75,6 +78,11 @@ const App = () => {
   };
 
   const handleNextIterations = () => {
+    if (pattern.length === 0) {
+      // If the pattern is empty, show the pop-up message
+      window.alert("Please enter an initial pattern first...");
+      return; // Exit the function to prevent further execution
+    }
     if (pattern.length > 0) {
       const iterations = 8;
       const iterationsList = [pattern];
@@ -129,64 +137,90 @@ const App = () => {
     }
   }, [selectedNoteSet]);
 
+  const AlertBox = ({ message, onClose }) => {
+    return (
+      <div className="alert-box">
+        <div className="alert-content">
+          <h3 className="alert-message">{message}</h3>
+          <button className="alert-button" onClick={onClose}>
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
+    const margin = 15;
+    const pageWidth = doc.internal.pageSize.width;
+    const lineHeight = 6;
+    const headingSpacing = 7;
+    const boldFontStyle = "underline";
+    let y = margin;
 
-    doc.text("Entered Pattern: " + pattern, 10, 10);
-    doc.text("Aaroh / Ascending:", 10, 20);
-    convertedAarohNotes.forEach((notes, index) => {
-      doc.text(notes, 10, 30 + index * 10);
+    doc.text("Entered Pattern: " + pattern, margin, y);
+    y += lineHeight + headingSpacing;
+
+    doc.setFont(boldFontStyle);
+    doc.text("Aaroh / Ascending:", margin, y);
+    doc.setFont("Inter");
+    y += lineHeight + headingSpacing;
+
+    convertedAarohNotes.forEach((notes) => {
+      const lines = doc.splitTextToSize(notes, pageWidth - 2 * margin);
+      lines.forEach((line) => {
+        doc.text(line, margin, y);
+        y += lineHeight;
+        if (y >= doc.internal.pageSize.height - margin) {
+          doc.addPage();
+          y = margin;
+        }
+      });
+      doc.line(margin, y, pageWidth - margin, y); // Add a divider line
+      y += lineHeight;
     });
-    doc.text("Avroh / Descending:", 10, 40 + convertedAarohNotes.length * 10);
-    convertedAvrohNotes.forEach((notes, index) => {
-      doc.text(
-        notes.split(" ").reverse().join(" "),
-        10,
-        50 + (convertedAarohNotes.length + index) * 10
-      );
+
+    y += lineHeight + headingSpacing;
+
+    doc.setFont(boldFontStyle);
+    doc.text("Avroh / Descending:", margin, y);
+    doc.setFont("Inter");
+    y += lineHeight + headingSpacing;
+
+    convertedAvrohNotes.forEach((notes) => {
+      const reversedNotes = notes.split(" ").reverse().join(" ");
+      const lines = doc.splitTextToSize(reversedNotes, pageWidth - 2 * margin);
+      lines.forEach((line) => {
+        doc.text(line, margin, y);
+        y += lineHeight;
+        if (y >= doc.internal.pageSize.height - margin) {
+          doc.addPage();
+          y = margin;
+        }
+      });
+      doc.line(margin, y, pageWidth - margin, y);
+      y += lineHeight;
     });
 
     doc.save("Your Alankar.pdf");
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/">
-          Your Alankar
-        </a>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">
-                Home<span className="sr-only"></span>
-              </a>
-
-              <a className="nav-link" href="/">
-                About<span className="sr-only"></span>
-              </a>
-            </li>
-          </ul>
+    <>
+      <BrowserRouter>
+        
+        <Routes>
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <div className="hero">
+          Generates Alankaar Patterns for you to Practice.
         </div>
-      </nav>
-      <div className="hh1">
-        <h1>Generates Alankaar Patterns for you to Practice.</h1>
-      </div>
-
-      <div className="container">
-        <div className="row">
-          <div className="col1">
-            <h3>
-              Refer to the image: <br />
-              Eg: Sa Re Ga Re Sa becomes 12321
-            </h3>
+        <div className="master">
+          <div className="div1">
             <div className="main-part">
               <label className="font-link">Select Note Style:</label>
-              <select
-                className="select"
-                value={selectedNoteSet.id}
-                onChange={handleNoteSetChange}
-              >
+              <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
                 {noteSets.map((set) => (
                   <option key={set.id} value={set.id}>
                     {set.label}
@@ -198,6 +232,7 @@ const App = () => {
 
               <label className="font-link">Enter Pattern:</label>
               <input
+                className="select"
                 type="text"
                 value={pattern}
                 onChange={handlePatternChange}
@@ -206,42 +241,51 @@ const App = () => {
                 // title="Please enter a valid pattern using numbers from 1 to 7 only."
               />
               <br />
-              <button
-                onClick={handleNextIterations}
-                disabled={iterationsPrinted}
-              >
+              <button onClick={handleNextIterations}>
                 {iterationsPrinted ? buttonTitle : "Generate"}
               </button>
             </div>
-            <br />
           </div>
-          <div className="col2">
-            <img src="assets\Refer.png" alt="yo" />
+
+          <div className="div2">
+            <img src={referimg} alt="yo" />
           </div>
-       
+          
         </div>
-      </div>
 
-      
-
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <h2 className="font-link">Entered Pattern: {pattern}</h2>
-        <h3 className="font-link">Aaroh / Ascending:</h3>
-        <ul>
-          {convertedAarohNotes.map((notes, index) => (
-            <li key={index}>{notes}</li>
-          ))}
-        </ul>
-        <h3 className="font-link">Avroh / Descending:</h3>
-        <ul>
-          {convertedAvrohNotes.reverse().map((notes, index) => (
-            <li key={index}>{notes.split(" ").reverse().join(" ")}</li>
-          ))}
-        </ul>
-        <button onClick={handleDownloadPDF}>Download PDF</button>
-        <button onClick={handleCloseModal}>Close</button>
-      </Modal>
-    </div>
+        <nav className="navbar fixed-top">
+          <ul className="nav-list">
+            <li className="logo">Alankaar</li>
+            <div className="rightNav">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </div>
+          </ul>
+        </nav>{" "}
+        <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
+          <button onClick={handleDownloadPDF}>Download PDF</button>
+          <h5>You can take a Screenshot or Download PDF</h5>
+          <h2 className="font-linkk">Entered Pattern: {pattern}</h2>
+          <h3 className="font-linkk">Aaroh / Ascending:</h3>
+          <ul>
+            {convertedAarohNotes.map((notes, index) => (
+              <li key={index}>{notes}</li>
+            ))}
+          </ul>
+          <h3 className="font-linkk">Avroh / Descending:</h3>
+          <ul>
+            {convertedAvrohNotes.reverse().map((notes, index) => (
+              <li key={index}>{notes.split(" ").reverse().join(" ")}</li>
+            ))}
+          </ul>
+          <button onClick={handleCloseModal}>Close</button>
+        </Modal>{" "}
+      </BrowserRouter>
+    </>
   );
 };
 

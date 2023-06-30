@@ -1,59 +1,134 @@
 /* App.css */
 
 body {
-  height: 99%;
   /* background: linear-gradient(133deg, #C5C5C5 0%, rgba(176, 176, 176, 0.98) 43.23%, rgba(126, 126, 126, 0.93) bac100%); */
-  background: linear-gradient(135deg, #c3c3c3, #828282);
-  margin-left: 50px;
-  margin-right: 50px;
-  height: 100vh;
+  background: linear-gradient(225deg, #0c0c0c, #213c3b);
+  /* background: #0c0c0c; */
+  margin-left: 1.6rem;
+  margin-right: 1.6rem;
+  height: 100%;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  font-size: 2.8rem;
+  align-content: center;
+  color: #e2e2e2;
+  padding: 2rem;
+  font-family: "Libre Caslon Display";
 }
 
 .navbar {
-  background-color: #f8f8f8;
+  position: sticky;
+  bottom: 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  padding-left: 30px;
-  padding-right: 30px;
-  border: 2px solid var(--stroke, #313200);
-  border-radius: 22px;
-  background: var(
-    --grad-2,
-    linear-gradient(
-      134deg,
-      rgba(66, 62, 32, 0.8) 0%,
-      rgba(69, 69, 69, 0.79) 100%
-    )
-  );
-  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
-
-  font-size: 15px;
-  font-family: "Libre Caslon Display", serif;
+  margin-top: 1.2rem;
+  margin-bottom: 3rem;
+  color: #303030;
+  border: 2px solid var(--stroke, #02362f);
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  background: linear-gradient(170deg, rgba(23, 114, 119, 0.5), rgba(45, 45, 45, 0.7));
+  box-shadow: 5px 4px 10px 0px rgba(62, 62, 62, 0.5);
+  font-size: 0.8rem;
+  font-family: "Libre Caslon Display";
 }
 
-.navbar-brand {
-  font-size: 30px;
-  color: #efefef;
+
+
+.nav-list {
+  color: hsl(0, 0%, 91%);
+  list-style-type: none;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.9rem;
+  margin-top: 0.9rem;
+}
+
+.logo {
+  /* border: 2px solid black; */
+  align-content: center;
+  font-size: 24px;
+  padding-left: 0.8rem;
+  padding-bottom: 0;
+  margin-right: 20px;
+}
+.rightNav {
+  padding: 0;
+  align-items: center;
+  display: flex;
+  /* border: 2px solid black; */
+  height: fit-content;
+  padding-right: 0.8rem;
+  /* align-self: flex-end; */
+  /* align-content: end; */
+}
+
+.rightNav li {
+  font-family: "Libre Caslon Display";
+  font-size: 1.5rem;
+  padding: 0;
+  margin-left: 0.2rem;
+  padding-right: 1.2rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.rightNav li a {
+  color: hsl(0, 0%, 91%);
+  display: flex;
   text-decoration: none;
 }
 
-.nav-link {
-  color: #efefef;
-  font-size: 30px;
-  padding: 20px;
+.master {
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.div1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  box-sizing: border-box;
+  width: 100%;
+  align-content: center;
+  align-self: center;
+  padding-bottom: 0.8rem;
+}
+
+.div1 > div {
+  margin-bottom: 20px;
+}
+.div2 {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  align-self: center;
+
+  padding-bottom: 0.8rem;
+}
 h1 {
   color: #3f3d2d;
-  font-size: 70px;
+  font-size: 4.2em;
   font-family: Libre Caslon Display, sans-serif, thin;
-  width: 55%;
+  width: 50%;
   /* border: 1px solid #007bff; */
 }
 
 h3 {
+  max-width: 100px;
   color: rgba(63, 61, 45, 0.5);
   font-size: 24px;
   font-family: Libre Caslon Text;
@@ -65,65 +140,77 @@ h3 {
   padding: 20px;
 } */
 
-.contrainer {
-  /* display: flex; */
-  /* justify-content: space-between; */
-  flex-direction: column;
-}
-
-.row {
-  /* display: flex; */
-  /* justify-content: space-between; */
-  flex-direction: column;
+.container {
+  display: inline-block;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 .main-part {
-  border-radius: 5px;
-  background: rgba(217, 217, 217, 0.39);
+  /* display: flex; */
+  flex-direction: column;
+  /* align-items: center; */
+  border-radius: 10px;
+  background: linear-gradient(to bottom right, #25536f, #4a7187, #599b75);
+  backdrop-filter: blur(10px);
   padding: 25px;
-  width: 350px;
+  width: 100%;
+  max-width: 310px;
   height: fit-content;
-
+  padding: 30px;
   /* Shadow */
-  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 4px 10px 0px rgba(94, 178, 227, 0.5);
 }
 
 .font-link {
-  color: #3f3d2d;
-  font-size: 24px;
+  color: #e8e8e8;
+  font-size: 1.6rem;
   font-family: Libre Caslon Text;
-  margin-top: 20px;
-  margin-bottom: auto;
+  /* padding-bottom: 0.5rem; */
+  margin-top: 1.6rem;
+  margin-bottom: 2rem;
 }
-.label {
-  margin-top: 20px;
-  font-weight: bold;
+
+.font-linkk {
+  color: #151515;
+  font-size: 1.6rem;
+  font-family: Libre Caslon Text;
+  /* padding-bottom: 0.5rem; */
+  margin-top: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 select {
   border: none;
   outline: none;
   background: none;
-  border-radius: 2px;
+  border-radius: 3px;
   background: #eaeaea;
-  font-size: 15px;
-  font-family: Libre Caslon Text;
+  font-size: 1rem;
   padding-left: 4px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: Libre Caslon Text;
   width: 100%;
   height: 30px;
   color: #3f3d2d;
+  margin-bottom: 1rem;
 }
 
 input[type="text"] {
   border: none;
   outline: none;
   background: none;
-  border-radius: 2px;
+  border-radius: 3px;
   background: #eaeaea;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   font-family: Libre Caslon Text;
+  font-size: 1rem;
   width: 100%;
-  padding-left: 4px;
   height: 30px;
+  padding-left: 4px;
   color: #3f3d2d;
 }
 
@@ -134,18 +221,70 @@ button {
   width: 100%;
   height: 50px;
   flex-shrink: 0;
-  border-radius: 5px;
-  background: #3f3d2d;
+  border-radius: 10px;
+  background: #2f4858;
   color: #f0f0f0;
   font-size: 28px;
   font-family: Libre Caslon Text;
-  margin-top: 30px;
-
+  margin-top: 0.8rem;
   /* Shadow */
   box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 
+.alert-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
+.alert-content {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+.alert-message {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.alert-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.alert-button:hover {
+  background-color: #0069d9;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #182a35;
+  transform: scale(1.04);
+}
+
+.nav-link:hover {
+  color: #d4d4d4;
+  font-size: 2rem;
+  padding: 1.5rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-decoration: underline;
+  font-family: "Libre Caslon Display";
+}
 
 button:disabled {
   background-color: #bdbdbd;
@@ -154,13 +293,12 @@ button:disabled {
 }
 
 ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: disc;
+  padding: 0.4rem;
   font-family: Libre Caslon Text;
-}
 
-li {
-  margin-bottom: 10px;
+  /* width: 100%; */
+  align-items: center;
 }
 
 .modal {
@@ -168,14 +306,10 @@ li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: #1d1d1d;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.random {
-  
 }
 
 .modal h2 {
@@ -200,4 +334,21 @@ li {
 
 .modal button + button {
   margin-left: 10px;
+}
+
+@media screen and (max-width: 500px) {
+  ul {
+  }
+  .master {
+    flex-direction: ;
+  }
+  .div1 {
+    flex-basis: 100%;
+    width: 100vh;
+  }
+
+  .div2 {
+    flex-basis: 100%;
+    width: 100%;
+  }
 }
