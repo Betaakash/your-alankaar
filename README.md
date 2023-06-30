@@ -2,12 +2,9 @@
 
 Indian Classical Music has this concept of 'Alankaar'. This is basically an exercise musicians do to bring flexibility in their voice/Fingers.
 
-A beginner can easily get comfortable with Alankaar length of 4-5 Notes, but when it comes to Alankaar lengths of more than 7, 8 notes... This webapp comes into picture. 
-It easily generates the 'Aaroh' and 'Avroh' of the Alankaar and let folks download Pdf of the Generated Pattern. 
+A beginner can easily get comfortable with Alankaar length of 4-5 Notes, but when it comes to length of more than 7, 8 notes... This webapp comes into picture. 
+It generates the 'Aaroh' and 'Avroh' of the Alankaar and let folks download Pdf of the Generated Pattern. 
  
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
