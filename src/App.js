@@ -44,6 +44,19 @@ const noteSets = [
   },
 ];
 
+const thaats = {
+  asavari: { 3: "gá", 6: "dhá", 7: "ní" },
+  bhairav: { 2: "ré", 6: "dhá" },
+  bhairavi: { 2: "ré", 3: "gá", 6: "dhá", 7: "ní" },
+  bilawal: {},
+  kafi: { 3: "gá", 7: "ní" },
+  kalyan: { 4: "ma'" },
+  khamaj: { 7: "ní" },
+  marwa: { 2: "ré", 4: "ma'" },
+  purvi: { 2: "ré", 4: "ma'", 6: "dhá" },
+  todi: { 3: "gá", 4: "ma'", 6: "dhá" },
+};
+
 const App = () => {
   const [pattern, setPattern] = useState("");
   const [convertedAarohNotes, setConvertedAarohNotes] = useState([]);
@@ -52,16 +65,34 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
   const [buttonTitle, setButtonTitle] = useState("Regenerate");
+  const [selectedThaat, setSelectedThaat] = useState("");
   // const location = useLocation();
 
   const [activePage, setActivePage] = useState("home");
 
+  // const convertPatternToNotes = (pattern) => {
+  //   const notes = pattern
+  //     .split("")
+  //     .map((digit) => selectedNoteSet.notes[digit]);
+  //   return notes.join(" ");
+  // };
+
   const convertPatternToNotes = (pattern) => {
-    const notes = pattern
-      .split("")
-      .map((digit) => selectedNoteSet.notes[digit]);
+    if (selectedNoteSet.label === "Do Re Mi Fa Sol La Ti..") {
+      return pattern.split("").map((digit) => selectedNoteSet.notes[digit]).join(" ");
+    }
+    
+    const thaatsNotes = thaats[selectedThaat];
+    const notes = pattern.split("").map((digit) => {
+      if (thaatsNotes && thaatsNotes[digit]) {
+        return thaatsNotes[digit];
+      }
+      return selectedNoteSet.notes[digit];
+    });
+    
     return notes.join(" ");
   };
+  
 
   const handlePatternChange = (e) => {
     const inputPattern = e.target.value;
@@ -90,10 +121,18 @@ const App = () => {
   };
 
   const handleNextIterations = () => {
+    
+
+    if (selectedThaat === "") {
+    
+      window.alert("Please Select a Thaat first (Go to About page to know more about Thaats in Indian Classical Music)");
+      return; 
+    }
+
     if (pattern.length === 0) {
-      // If the pattern is empty, show the pop-up message
+ 
       window.alert("Please enter an initial pattern first...");
-      return; // Exit the function to prevent further execution
+      return; 
     }
     if (pattern.length > 0) {
       const iterations = 8;
@@ -115,6 +154,21 @@ const App = () => {
       setConvertedAvrohNotes(convertedAvrohIterations);
       setIterationsPrinted(true);
       setIsModalOpen(true);
+    }
+  };
+
+  const handleThaatChange = (e) => {
+    const selectedThaat = e.target.value;
+    setSelectedThaat(selectedThaat);
+
+    if (iterationsPrinted) {
+      const convertedAarohIterations = convertedAarohNotes.map((iter) =>
+        convertPatternToNotes(iter)
+      );
+      const convertedAvrohIterations = [...convertedAarohIterations].reverse();
+
+      setConvertedAarohNotes(convertedAarohIterations);
+      setConvertedAvrohNotes(convertedAvrohIterations);
     }
   };
 
@@ -234,11 +288,25 @@ const App = () => {
                 </option>
               ))}
             </select>
-
             <br />
-
+            <label className="font-link">Select Thaat:</label>
+            <select value={selectedThaat} onChange={handleThaatChange}>
+              <option value="">None</option>
+              <option value="asavari">Asavari</option>
+              <option value="bhairav">Bhairav</option>
+              <option value="bhairavi">Bhairavi</option>
+              <option value="bilawal">Bilawal</option>
+              <option value="kafi">Kafi</option>
+              <option value="kalyan">Kalyan</option>
+              <option value="khamaj">Khamaj</option>
+              <option value="marwa">Marwa</option>
+              <option value="purvi">Purvi</option>
+              <option value="todi">Todi</option>
+            </select>
             <label className="font-link">Enter first Pattern:</label> <br />
-            <label className="font-linkkk">Eg: Sa Re Ga Re Sa becomes 12321</label>
+            <label className="font-linkkk">
+              Eg: Sa Re Ga Re Sa becomes 12321
+            </label>
             <input
               className="select"
               type="text"
@@ -258,7 +326,6 @@ const App = () => {
         <div className="div2">
           <img src={referimg} alt="yo" />
         </div>
-        
       </div>
       <nav className="navbar fixed-top">
         <ul className="nav-list">
@@ -277,7 +344,6 @@ const App = () => {
           </div>
         </ul>
       </nav>{" "}
-      
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
         <button onClick={handleDownloadPDF} className="modal-button">
           Download PDF

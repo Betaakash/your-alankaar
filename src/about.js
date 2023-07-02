@@ -21,11 +21,19 @@ const About = () => {
             same concept is referred to as palta or alankara in Hindustani
             music. <br /> <br />
             This Webapp eases the process of creating the alankaar patterns so
-            that the musicians can practice/riyaz alankaars easily.
+            that the musicians can practice/riyaz alankaars easily. <br />{" "}
+            <br />
+            Know more about thaats at{" "}
+            <a className="another_link"
+              href="https://www.swarganga.org/articles/icmconcepts/icm5.php"
+              target="_blank"
+            >
+             <i>https://www.swarganga.org/articles/icmconcepts/icm5.php </i>
+            </a>
           </p>
         </div>
         <div className="abouthero">Developed by Aakash</div>
-        <p>
+        <p className="classp">
           <b>Get in Touch · Have a Good Day :)</b>
         </p>
         <div className="contactlinks">

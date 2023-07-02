@@ -2,6 +2,18 @@
   height: 100vh;
 }
 
+.another_link {
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  text-decoration: none;
+  margin: inherit;
+  color: inherit;
+  padding: inherit;
+
+}
+
 .music {
   margin: 0 auto;
   margin-top: 1.5rem;
@@ -34,6 +46,8 @@
   color: rgb(109, 109, 109);
 }
 
+
+
 .navbar {
   position: sticky;
   bottom: 2rem;
@@ -56,6 +70,16 @@
 }
 
 p {
+  font-family: "Roboto Mono", monospace;
+  /* display: flex; */
+  font-size: 1rem;
+  color: #e2e2e2;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.classp {
   font-family: "Roboto Mono", monospace;
   display: flex;
   font-size: 1rem;
