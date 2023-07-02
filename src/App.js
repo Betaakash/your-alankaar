@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  Routes,
+  useLocation,
+  withRouter,
+  NavLink,
+} from "react-router-dom";
+import Switch from "react-router-dom";
 import About from "./about";
 import Modal from "react-modal";
 import "./App.css";
@@ -43,7 +52,9 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNoteSet, setSelectedNoteSet] = useState(noteSets[0]);
   const [buttonTitle, setButtonTitle] = useState("Regenerate");
+  // const location = useLocation();
 
+  const [activePage, setActivePage] = useState("home");
 
   const convertPatternToNotes = (pattern) => {
     const notes = pattern
@@ -209,83 +220,81 @@ const App = () => {
 
   return (
     <>
-      <BrowserRouter>
-        
-        <Routes>
-          <Route path="/about" element={<About />} />
-        </Routes>
-        <div className="hero">
-          Generates Alankaar Patterns for you to Practice.
-        </div>
-        <div className="master">
-          <div className="div1">
-            <div className="main-part">
-              <label className="font-link">Select Note Style:</label>
-              <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
-                {noteSets.map((set) => (
-                  <option key={set.id} value={set.id}>
-                    {set.label}
-                  </option>
-                ))}
-              </select>
+      <div className="hero">
+        Generates Alankaar Patterns for you to Practice.
+      </div>
+      <div className="master">
+        <div className="div1">
+          <div className="main-part">
+            <label className="font-link">Select Note Style:</label>
+            <select value={selectedNoteSet.id} onChange={handleNoteSetChange}>
+              {noteSets.map((set) => (
+                <option key={set.id} value={set.id}>
+                  {set.label}
+                </option>
+              ))}
+            </select>
 
-              <br />
+            <br />
 
-              <label className="font-link">Enter Pattern:</label>
-              <input
-                className="select"
-                type="text"
-                value={pattern}
-                onChange={handlePatternChange}
-                pattern="[1-7]*"
-                placeholder="Enter here..."
-                // title="Please enter a valid pattern using numbers from 1 to 7 only."
-              />
-              <br />
-              <button onClick={handleNextIterations}>
-                {iterationsPrinted ? buttonTitle : "Generate"}
-              </button>
-            </div>
+            <label className="font-link">Enter Pattern:</label>
+            <input
+              className="select"
+              type="text"
+              value={pattern}
+              onChange={handlePatternChange}
+              pattern="[1-7]*"
+              placeholder="Enter here..."
+              // title="Please enter a valid pattern using numbers from 1 to 7 only."
+            />
+            <br />
+            <button onClick={handleNextIterations}>
+              {iterationsPrinted ? buttonTitle : "Generate"}
+            </button>
           </div>
-
-          <div className="div2">
-            <img src={referimg} alt="yo" />
-          </div>
-          
         </div>
 
-        <nav className="navbar fixed-top">
-          <ul className="nav-list">
-            <li className="logo">Alankaar</li>
-            <div className="rightNav">
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </div>
-          </ul>
-        </nav>{" "}
-        <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-          <button onClick={handleDownloadPDF}>Download PDF</button>
-          <h5>You can take a Screenshot or Download PDF</h5>
-          <h2 className="font-linkk">Entered Pattern: {pattern}</h2>
-          <h3 className="font-linkk">Aaroh / Ascending:</h3>
-          <ul>
-            {convertedAarohNotes.map((notes, index) => (
-              <li key={index}>{notes}</li>
-            ))}
-          </ul>
-          <h3 className="font-linkk">Avroh / Descending:</h3>
-          <ul>
-            {convertedAvrohNotes.reverse().map((notes, index) => (
-              <li key={index}>{notes.split(" ").reverse().join(" ")}</li>
-            ))}
-          </ul>
-          <button onClick={handleCloseModal}>Close</button>
-        </Modal>{" "}
-      </BrowserRouter>
+        <div className="div2">
+          <img src={referimg} alt="yo" />
+        </div>
+      </div>
+      <nav className="navbar fixed-top">
+        <ul className="nav-list">
+          <li className="logo">Alankaar</li>
+          <div className="rightNav">
+            <li>
+              <NavLink exact activeClassName="active_class" to="/">
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink exact activeClassName="active_class" to="/about">
+                About
+              </NavLink>
+            </li>
+          </div>
+        </ul>
+      </nav>{" "}
+      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
+        <button onClick={handleDownloadPDF} className="modal-button">
+          Download PDF
+        </button>
+        <h5>You can take a Screenshot or Download PDF</h5>
+        <h2 className="font-linkk">Entered Pattern: {pattern}</h2>
+        <h3 className="font-linkk">Aaroh / Ascending:</h3>
+        <ul>
+          {convertedAarohNotes.map((notes, index) => (
+            <li key={index}>{notes}</li>
+          ))}
+        </ul>
+        <h3 className="font-linkk">Avroh / Descending:</h3>
+        <ul>
+          {convertedAvrohNotes.reverse().map((notes, index) => (
+            <li key={index}>{notes.split(" ").reverse().join(" ")}</li>
+          ))}
+        </ul>
+        <button onClick={handleCloseModal}>Close</button>
+      </Modal>{" "}
     </>
   );
 };

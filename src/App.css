@@ -32,16 +32,18 @@ body {
   border: 2px solid var(--stroke, #02362f);
   border-radius: 14px;
   backdrop-filter: blur(2px);
-  background: linear-gradient(170deg, rgba(23, 114, 119, 0.5), rgba(45, 45, 45, 0.7));
+  background: linear-gradient(
+    170deg,
+    rgba(82, 149, 152, 0.5),
+    rgba(60, 60, 60, 0.7)
+  );
   box-shadow: 5px 4px 10px 0px rgba(62, 62, 62, 0.5);
   font-size: 0.8rem;
   font-family: "Libre Caslon Display";
 }
 
-
-
 .nav-list {
-  color: hsl(0, 0%, 91%);
+  color: hsl(0, 0%, 96%);
   list-style-type: none;
   display: flex;
   text-decoration: none;
@@ -152,7 +154,7 @@ h3 {
   flex-direction: column;
   /* align-items: center; */
   border-radius: 10px;
-  background: linear-gradient(to bottom right, #25536f, #4a7187, #599b75);
+  background: linear-gradient(to bottom right, #366887, #2f5267, #3d7b57);
   backdrop-filter: blur(10px);
   padding: 25px;
   width: 100%;
@@ -164,7 +166,7 @@ h3 {
 }
 
 .font-link {
-  color: #e8e8e8;
+  color: #f1f1f1;
   font-size: 1.6rem;
   font-family: Libre Caslon Text;
   /* padding-bottom: 0.5rem; */
@@ -181,6 +183,10 @@ h3 {
   margin-bottom: 2rem;
 }
 
+.active_class {
+  color: gray;
+}
+
 select {
   border: none;
   outline: none;
@@ -194,7 +200,7 @@ select {
   font-family: Libre Caslon Text;
   width: 100%;
   height: 30px;
-  color: #3f3d2d;
+  color: #26251d;
   margin-bottom: 1rem;
 }
 
@@ -211,7 +217,7 @@ input[type="text"] {
   width: 100%;
   height: 30px;
   padding-left: 4px;
-  color: #3f3d2d;
+  color: #21211a;
 }
 
 button {
@@ -306,8 +312,8 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #1d1d1d;
-  padding: 20px;
+  background-color: #d1d1d1;
+  padding: 1rem;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -322,18 +328,24 @@ ul {
 }
 
 .modal button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #2f4858;
+  color: #f0f0f0;
+  font-size: 28px;
+  font-family: Libre Caslon Text;
+  margin-top: 0.8rem;
+  /* Shadow */
+  box-shadow: 5px 4px 10px 0px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
 }
 
 .modal button + button {
   margin-left: 10px;
 }
 
-
+.active_class {
+  color: rgb(109, 109, 109);
+}

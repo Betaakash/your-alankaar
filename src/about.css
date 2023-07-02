@@ -1,10 +1,14 @@
+.boddy {
+  height: 100vh;
+}
+
 .contactlinks {
   margin-top: 2rem;
   margin: 0 auto;
   display: flex;
   border: 2px solid white;
   align-content: center;
-  max-width: 80%;
+  max-width: 35rem;
   align-items: center;
 
   justify-content: space-between;
@@ -12,6 +16,32 @@
   border-radius: 40px;
   box-shadow: 5px 4px 10px 0px rgba(94, 178, 227, 0.5);
 }
+
+.active_class {
+  color: rgb(109, 109, 109);
+}
+
+.navbar {
+  position: sticky;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 3rem;
+  color: #303030;
+  border: 2px solid var(--stroke, #02362f);
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+  background: linear-gradient(
+    170deg,
+    rgba(82, 149, 152, 0.5),
+    rgba(60, 60, 60, 0.7)
+  );
+  box-shadow: 5px 4px 10px 0px rgba(62, 62, 62, 0.5);
+  font-size: 0.8rem;
+  font-family: "Libre Caslon Display";
+}
+
 p {
   font-family: "Roboto Mono", monospace;
   display: flex;
@@ -44,8 +74,8 @@ p {
   justify-content: space-between;
   text-decoration: none;
   align-content: center;
-  padding-right: 1.7rem;
-  padding-left: 1.7rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
 }
 
 .contactlinks ul li a img {
