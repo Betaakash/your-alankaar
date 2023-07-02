@@ -289,7 +289,10 @@ const App = () => {
               ))}
             </select>
             <br />
-            <label className="font-link">Select Thaat:</label>
+            <label className="font-link">Select Thaat:</label> <br />
+            <label className="font-linkkk">
+              Go to About Page to know more about Thaats
+            </label>
             <select value={selectedThaat} onChange={handleThaatChange}>
               <option value="">None</option>
               <option value="asavari">Asavari</option>
