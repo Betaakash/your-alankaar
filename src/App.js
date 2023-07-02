@@ -131,11 +131,11 @@ const App = () => {
       return; 
     }
 
-    if (selectedThaat === "") {
+    // if (selectedThaat === "") {
     
-      window.alert("Please Select a Thaat first (Go to About page to know more about Thaats in Indian Classical Music)");
-      return; 
-    }
+    //   window.alert("Please Select a Thaat first (Go to About page to know more about Thaats in Indian Classical Music)");
+    //   return; 
+    // }
     if (pattern.length > 0) {
       const iterations = 8;
       const iterationsList = [pattern];
@@ -161,7 +161,7 @@ const App = () => {
 
   const handleThaatChange = (e) => {
     const selectedThaat = e.target.value;
-    setSelectedThaat(selectedThaat);
+    setSelectedThaat(selectedThaat === "" ? "bilawal" : selectedThaat);
 
     if (iterationsPrinted) {
       const convertedAarohIterations = convertedAarohNotes.map((iter) =>
