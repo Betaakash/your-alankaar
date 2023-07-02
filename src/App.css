@@ -4,8 +4,9 @@ body {
   /* background: linear-gradient(133deg, #C5C5C5 0%, rgba(176, 176, 176, 0.98) 43.23%, rgba(126, 126, 126, 0.93) bac100%); */
   background: linear-gradient(225deg, #0c0c0c, #213c3b);
   /* background: #0c0c0c; */
-  margin-left: 1.6rem;
-  margin-right: 1.6rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
   height: 100%;
 }
 
@@ -26,8 +27,8 @@ body {
   bottom: 2rem;
   display: flex;
   align-items: center;
-  margin-top: 1.2rem;
-  margin-bottom: 3rem;
+  justify-content: center; /* Added to center the navbar horizontally */
+  margin-bottom: 2rem;
   color: #303030;
   border: 2px solid var(--stroke, #02362f);
   border-radius: 14px;
@@ -92,6 +93,7 @@ body {
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
+  /* border: 1px solid white; */
 }
 
 .div1 {
@@ -174,6 +176,16 @@ h3 {
   margin-bottom: 2rem;
 }
 
+
+.font-linkkk {
+  color: #d9d9d9;
+  font-size: 0.9rem;
+  font-family: Libre Caslon Text;
+  /* padding-bottom: 0.5rem; */
+  margin-top: 1.8rem;
+  margin-bottom: 2rem;
+}
+
 .font-linkk {
   color: #151515;
   font-size: 1.6rem;
@@ -228,7 +240,7 @@ button {
   height: 50px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: #2f4858;
+  background: #345265;
   color: #f0f0f0;
   font-size: 28px;
   font-family: Libre Caslon Text;

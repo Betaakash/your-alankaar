@@ -2,6 +2,19 @@
   height: 100vh;
 }
 
+.music {
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  max-width: 35rem;
+  margin-bottom: 0;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  align-self: center;
+  /* font-size: 2.8rem; */
+  align-content: center;
+}
+
 .contactlinks {
   margin-top: 2rem;
   margin: 0 auto;
@@ -60,7 +73,8 @@ p {
   font-size: 2.8rem;
   align-content: center;
   color: #e2e2e2;
-  padding: 4.5rem;
+  padding: 4rem;
+  padding-top: 2.5rem;
   padding-bottom: 2rem;
   font-family: "Roboto Mono", monospace;
 }

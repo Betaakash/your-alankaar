@@ -237,7 +237,8 @@ const App = () => {
 
             <br />
 
-            <label className="font-link">Enter Pattern:</label>
+            <label className="font-link">Enter first Pattern:</label> <br />
+            <label className="font-linkkk">Eg: Sa Re Ga Re Sa becomes 12321</label>
             <input
               className="select"
               type="text"
@@ -257,6 +258,7 @@ const App = () => {
         <div className="div2">
           <img src={referimg} alt="yo" />
         </div>
+        
       </div>
       <nav className="navbar fixed-top">
         <ul className="nav-list">
@@ -275,6 +277,7 @@ const App = () => {
           </div>
         </ul>
       </nav>{" "}
+      
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
         <button onClick={handleDownloadPDF} className="modal-button">
           Download PDF

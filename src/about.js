@@ -12,6 +12,18 @@ const About = () => {
   return (
     <>
       <div className="boddy">
+        <div className="music">
+          <p>
+            An alankara is any pattern of musical decoration a musician or
+            vocalist creates within or across tones, based on ancient musical
+            theories or driven by personal creative choices, in a progression of
+            svaras. The term alankara is standard in Carnatic music, while the
+            same concept is referred to as palta or alankara in Hindustani
+            music. <br /> <br />
+            This Webapp eases the process of creating the alankaar patterns so
+            that the musicians can practice/riyaz alankaars easily.
+          </p>
+        </div>
         <div className="abouthero">Developed by Aakash</div>
         <p>
           <b>Get in Touch · Have a Good Day :)</b>
