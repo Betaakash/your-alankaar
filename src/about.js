@@ -24,11 +24,11 @@ const About = () => {
             that the musicians can practice/riyaz alankaars easily. <br />{" "}
             <br />
             Know more about thaats at{" "}
-            <a className="another_link"
+            <a id="another_link"
               href="https://www.swarganga.org/articles/icmconcepts/icm5.php"
               target="_blank"
             >
-             <i>https://www.swarganga.org/articles/icmconcepts/icm5.php </i>
+             <i>https://www.swarganga.org/ </i>
             </a>
           </p>
         </div>
@@ -66,8 +66,7 @@ const About = () => {
           </ul>
         </div>
       </div>
-      <>
-        <nav className="navbar fixed-top">
+      <nav className="navbar fixed-top">
           <ul className="nav-list">
             <li className="logo">Alankaar</li>
             <div className="rightNav">
@@ -84,6 +83,8 @@ const About = () => {
             </div>
           </ul>
         </nav>
+      <>
+        
       </>{" "}
     </>
   );
