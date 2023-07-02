@@ -123,15 +123,17 @@ const App = () => {
   const handleNextIterations = () => {
     
 
-    if (selectedThaat === "") {
-    
-      window.alert("Please Select a Thaat first (Go to About page to know more about Thaats in Indian Classical Music)");
-      return; 
-    }
+   
 
     if (pattern.length === 0) {
  
       window.alert("Please enter an initial pattern first...");
+      return; 
+    }
+
+    if (selectedThaat === "") {
+    
+      window.alert("Please Select a Thaat first (Go to About page to know more about Thaats in Indian Classical Music)");
       return; 
     }
     if (pattern.length > 0) {
