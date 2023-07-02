@@ -66,6 +66,8 @@ const About = () => {
           </ul>
         </div>
       </div>
+      
+      <>
       <nav className="navbar fixed-top">
           <ul className="nav-list">
             <li className="logo">Alankaar</li>
@@ -83,8 +85,6 @@ const About = () => {
             </div>
           </ul>
         </nav>
-      <>
-        
       </>{" "}
     </>
   );
