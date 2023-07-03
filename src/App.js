@@ -45,16 +45,16 @@ const noteSets = [
 ];
 
 const thaats = {
-  asavari: { 3: "gá", 6: "dhá", 7: "ní" },
-  bhairav: { 2: "ré", 6: "dhá" },
-  bhairavi: { 2: "ré", 3: "gá", 6: "dhá", 7: "ní" },
-  bilawal: {},
-  kafi: { 3: "gá", 7: "ní" },
-  kalyan: { 4: "ma'" },
-  khamaj: { 7: "ní" },
-  marwa: { 2: "ré", 4: "ma'" },
-  purvi: { 2: "ré", 4: "ma'", 6: "dhá" },
-  todi: { 3: "gá", 4: "ma'", 6: "dhá" },
+  Asavari: { 3: "gá", 6: "dhá", 7: "ní" },
+  Bhairav: { 2: "ré", 6: "dhá" },
+  Bhairavi: { 2: "ré", 3: "gá", 6: "dhá", 7: "ní" },
+  Bilawal: {},
+  Kafi: { 3: "gá", 7: "ní" },
+  Kalyan: { 4: "ma'" },
+  Khamaj: { 7: "ní" },
+  Marwa: { 2: "ré", 4: "ma'" },
+  Purvi: { 2: "ré", 4: "ma'", 6: "dhá" },
+  Todi: { 3: "gá", 4: "ma'", 6: "dhá" },
 };
 
 const App = () => {
@@ -161,7 +161,7 @@ const App = () => {
 
   const handleThaatChange = (e) => {
     const selectedThaat = e.target.value;
-    setSelectedThaat(selectedThaat === "" ? "bilawal" : selectedThaat);
+    setSelectedThaat(selectedThaat === "" ? "Bilawal" : selectedThaat);
 
     if (iterationsPrinted) {
       const convertedAarohIterations = convertedAarohNotes.map((iter) =>
@@ -228,6 +228,8 @@ const App = () => {
     let y = margin;
 
     doc.text("Entered Pattern: " + pattern, margin, y);
+    y += lineHeight + headingSpacing;
+    doc.text("Thaat: " + selectedThaat, margin, y);
     y += lineHeight + headingSpacing;
 
     doc.setFont(boldFontStyle);
@@ -297,16 +299,16 @@ const App = () => {
             </label>
             <select value={selectedThaat} onChange={handleThaatChange}>
               <option value="">None</option>
-              <option value="asavari">Asavari</option>
-              <option value="bhairav">Bhairav</option>
-              <option value="bhairavi">Bhairavi</option>
-              <option value="bilawal">Bilawal</option>
-              <option value="kafi">Kafi</option>
-              <option value="kalyan">Kalyan</option>
-              <option value="khamaj">Khamaj</option>
-              <option value="marwa">Marwa</option>
-              <option value="purvi">Purvi</option>
-              <option value="todi">Todi</option>
+              <option value="Asavari">Asavari</option>
+              <option value="Bhairav">Bhairav</option>
+              <option value="Bhairavi">Bhairavi</option>
+              <option value="Bilawal">Bilawal</option>
+              <option value="Kafi">Kafi</option>
+              <option value="Kalyan">Kalyan</option>
+              <option value="Khamaj">Khamaj</option>
+              <option value="Marwa">Marwa</option>
+              <option value="Purvi">Purvi</option>
+              <option value="Todi">Todi</option>
             </select>
             <label className="font-link">Enter first Pattern:</label> <br />
             <label className="font-linkkk">
@@ -355,6 +357,7 @@ const App = () => {
         </button>
         <h5>You can take a Screenshot or Download PDF</h5>
         <h2 className="font-linkk">Entered Pattern: {pattern}</h2>
+        <h2 className="font-linkk">Thaat: {selectedThaat}</h2>
         <h3 className="font-linkk">Aaroh / Ascending:</h3>
         <ul>
           {convertedAarohNotes.map((notes, index) => (
