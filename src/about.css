@@ -19,6 +19,7 @@
   max-width: 35rem;
   margin-bottom: 0;
   /* display: flex; */
+  text-justify: center;
   justify-content:center;
   /* margin-right: 1.5rem; */
   align-items: center;

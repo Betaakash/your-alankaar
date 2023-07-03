@@ -9,7 +9,9 @@ body {
   margin-bottom: 0;
   height: 100%;
 }
-
+p {
+  text-align: justify;
+}
 .hero {
   display: flex;
   justify-content: center;
