@@ -19,7 +19,7 @@
   max-width: 35rem;
   margin-bottom: 0;
   /* display: flex; */
-  text-justify: center;
+  text-justify: centerFabout;
   justify-content:center;
   /* margin-right: 1.5rem; */
   align-items: center;
@@ -93,6 +93,7 @@ p {
 }
 
 .abouthero {
+  text-align: justify;
   display: flex;
   justify-content: center;
   align-items: center;

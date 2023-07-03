@@ -153,7 +153,7 @@ const App = () => {
       const convertedAvrohIterations = [...convertedAarohIterations].reverse();
 
       setConvertedAarohNotes(convertedAarohIterations);
-      setConvertedAvrohNotes(convertedAvrohIterations);
+      setConvertedAvrohNotes(convertedAvrohIterations.reverse());
       setIterationsPrinted(true);
       setIsModalOpen(true);
     }
