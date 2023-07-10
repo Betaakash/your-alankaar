@@ -14,6 +14,7 @@ import Modal from "react-modal";
 import "./App.css";
 import jsPDF from "jspdf";
 import referimg from "./Images/Refer.png";
+import {Analytics} from '@vercel/analytics/react';
 
 const noteSets = [
   {
@@ -45,16 +46,16 @@ const noteSets = [
 ];
 
 const thaats = {
-  Asavari: { 3: "gá", 6: "dhá", 7: "ní" },
-  Bhairav: { 2: "ré", 6: "dhá" },
-  Bhairavi: { 2: "ré", 3: "gá", 6: "dhá", 7: "ní" },
+  Asavari: { 3: "Gá", 6: "Dhá", 7: "Ní" },
+  Bhairav: { 2: "Ré", 6: "Dhá" },
+  Bhairavi: { 2: "Ré", 3: "Gá", 6: "Dhá", 7: "Ní" },
   Bilawal: {},
-  Kafi: { 3: "gá", 7: "ní" },
-  Kalyan: { 4: "ma'" },
-  Khamaj: { 7: "ní" },
-  Marwa: { 2: "ré", 4: "ma'" },
-  Purvi: { 2: "ré", 4: "ma'", 6: "dhá" },
-  Todi: { 3: "gá", 4: "ma'", 6: "dhá" },
+  Kafi: { 3: "Gá", 7: "Ní" },
+  Kalyan: { 4: "Ma'" },
+  Khamaj: { 7: "Ní" },
+  Marwa: { 2: "Ré", 4: "Ma'" },
+  Purvi: { 2: "Ré", 4: "Ma'", 6: "Dhá" },
+  Todi: { 3: "Gá", 4: "Ma'", 6: "Dhá" },
 };
 
 const App = () => {
@@ -121,10 +122,6 @@ const App = () => {
   };
 
   const handleNextIterations = () => {
-    
-
-   
-
     if (pattern.length === 0) {
  
       window.alert("Please enter an initial pattern first...");
@@ -273,7 +270,7 @@ const App = () => {
       y += lineHeight;
     });
 
-    doc.save("Your Alankar.pdf");
+    doc.save("Your Alankaar.pdf");
   };
 
   return (
@@ -372,6 +369,7 @@ const App = () => {
         </ul>
         <button onClick={handleCloseModal}>Close</button>
       </Modal>{" "}
+      <Analytics/>
     </>
   );
 };
